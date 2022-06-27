@@ -1,4 +1,6 @@
-const url = 'http://localhost:3000' || 'https://nodereplchat.herokuapp.com/'
+#!/usr/bin/env node
+
+const url = 'https://nodereplchat.herokuapp.com/'
 const chalk = require('chalk');
 const user = process.argv[2]
 const room = process.argv[3]
@@ -33,19 +35,20 @@ const clrL = () => {
 }
 const connecting =async ()=>{
 	while(loading){
-		log("connecting.")
+		log(chalk.greenBright("connecting."))
 		await sleep(250)
 		clrL()
-		log("connecting..")
+		log(chalk.greenBright("connecting.."))
 		await sleep(250)
 		clrL()
-		log("connecting...")
+		log(chalk.greenBright("connecting..."))
 		await sleep(250)
 		clrL()
 	}
 	if(!loading){
 		clrL()
-		console.log("connected to server!")
+		console.log(chalk.yellow("connected to server!"))
+		console.log(chalk.yellow("\nTry Sending a message :)"))
 	}
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -70,7 +73,7 @@ const printIncoming = (msg,usr,clr,uid)=>{
 
 const startup = async()=>{
 	figlet("REPL CHAT",async (err,data)=>{
-		console.log(data)
+		console.log(chalk.red(data))
 		logo=true
 	})
 	await wait()

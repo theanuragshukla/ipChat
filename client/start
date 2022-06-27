@@ -2,5 +2,5 @@
 #user=$(node -pe 'JSON.parse(process.argv[1]).user' "$(cat ./config)")
 read -p "enter username: " user
 read -p "enter roomID: " room
-echo 
-nodemon client.js "$user" "$room"
+clear
+./client "$user" "$room"

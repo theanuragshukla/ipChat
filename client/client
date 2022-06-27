@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env nodemon
 
 const url = 'https://nodereplchat.herokuapp.com/'
 const chalk = require('chalk');
@@ -14,18 +14,18 @@ const readline = require('readline').createInterface({
 	output: process.stdout
 })
 const color = ['red', 'green', 'blue', 'magenta', 'cyan', 'white'];
-const inpMsg = (ques,cb)=>{
+const inpMsg =async (ques,cb)=>{
 	readline.question(ques,(msg)=>{
 		rl.moveCursor(process.stdout,0,-2)
 		rl.clearScreenDown(process.stdout)
 		cb(msg)
 	})
 }
-const printMsg = (msg) =>{
-	socket.emit('message',{msg,user})
-	inpMsg('# ',printMsg)
+const printMsg =async (msg) =>{
+	await socket.emit('message',{msg,user})
+	inpMsg('> ',printMsg)
 }
-const log = (msg,newLine) => {
+const log = async(msg,newLine) => {
 	if(newLine)
 		process.stdout.write("\n")
 	process.stdout.write(msg)
@@ -60,17 +60,27 @@ const wait = async () => {
 	await sleep(250)
 	return wait()
 }
-
-const printIncoming = (msg,usr,clr,uid)=>{
+/*
+const printIncoming =async (msg,usr,clr,uid)=>{
 	rl.moveCursor(process.stdout, 0, -2)
 	clrL()
-	log(chalk[color[clr]](`${usr}#${uid}` + ': ' + msg.split('\n')[0])+'\n')
+	log(chalk[color[clr]](`${usr}#${uid}` + ': ' + msg.split('\n')[0]))
+	rl.moveCursor(process.stdout, 0, 2)
 	rl.clearScreenDown(process.stdout)
 	console.log('\n')
 	inpMsg('# ',printMsg)
 
 }
+*/
+const printIncoming = (msg,usr,clr,uid)=>{
+	rl.moveCursor(process.stdout, 0, -1)
+	clrL()
+	log(chalk[color[clr]](`${usr}#${uid}` + ': ' + msg.split('\n')[0]))
+	rl.clearScreenDown(process.stdout)
+	console.log('\n')
+	inpMsg('# ',printMsg)
 
+}
 const startup = async()=>{
 	figlet("REPL CHAT",async (err,data)=>{
 		console.log(chalk.red(data))

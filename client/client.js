@@ -1,4 +1,3 @@
-#!/usr/bin/env nodemon
 
 const url = 'https://nodereplchat.herokuapp.com/'
 const chalk = require('chalk');

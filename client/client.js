@@ -22,11 +22,11 @@ const inpMsg =async (ques,cb)=>{
 }
 const printMsg =async (msg) =>{
 	await socket.emit('message',{msg,user})
-	inpMsg('> ',printMsg)
+	inpMsg('# ',printMsg)
 }
 const log = async(msg,newLine) => {
 	if(newLine)
-		process.stdout.write("\n")
+		process.stdout.write("\n\n")
 	process.stdout.write(msg)
 }
 const clrL = () => {

@@ -3,4 +3,4 @@
 read -p "enter username: " user
 read -p "enter roomID: " room
 clear
-nodemon client.js "$user" "$room"
+nodemon -q client.js "$user" "$room"
